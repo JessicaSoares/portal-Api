@@ -2,6 +2,7 @@ const db = require("../models");
 const Tutorial = db.tutorials;
 const Queimadas = db.defesas;
 const FolhaPagamento = db.folhapagamento;
+const Aves = db.aves;
 const AgriFamiliar = db.agrifamiliar;
 const Op = db.Sequelize.Op;
 
@@ -87,6 +88,283 @@ exports.downloadagrifamiliar = (req, res) => {
     res.status(200).end(csvData);
   });
 };
+
+exports.downloadaves = (req, res) => {
+  Aves.findAll().then((objs) => {
+    let defesas = [];
+
+    objs.forEach((obj) => {
+      const { capacidadetotalalojamento,finalidadeavicultura,finalidadecorte,finalidadepostura, freqvendaabate,freqvendamensal,freqvendaoutros ,freqvendasemanal ,freqvendatrimestral, geneticaavescaipira,geneticaavesindustrial, idadeaoabate, incubadora,ingredientesdaracaoproduzida,localvendaabatedouro,localvendafeiralivre,localvendafrigorifico,localvendanapropriedade
+        ,localvendaoutros
+        ,localvendasupermercado
+        ,objetivoconsumo
+        ,objetivoincubadoracriacao
+        ,objetivoincubadoravenda
+        ,objetivovenda,
+        pesomedio,
+        principaisentraves,
+        prodsemanalovos,
+        producaomensaldepintos,
+        produtoscomercfrangaspostura,
+        produtoscomercfrangoabatido,
+        produtoscomercfrangovivo,
+        produtoscomercovos,
+        produtoscomercovosferteis,
+        produtoscomercpinto1dia,
+        produtoscomercreprodutores,
+        qtdanimaisalojados,
+        qtdavesparavenda,
+        qtdgalpoesavicultura,
+        quaisvacinas,
+        quantpessoas,
+        racaocomercialcrescimento,
+        racaocomercialinicial,
+        racaocomercialmarca,
+        racaocomercialterminacao,
+        racaoproduzidacrescimento,
+        racaoproduzidainicial,
+        racaoproduzidaterminacao,
+        sistemacriacaoextensivo,
+        sistemacriacaointensivo,
+        sistemacriacaosemiintensivo,
+        vacinas } = obj;
+      defesas.push({ capacidadetotalalojamento,finalidadeavicultura,finalidadecorte,finalidadepostura, freqvendaabate,freqvendamensal,freqvendaoutros ,freqvendasemanal ,freqvendatrimestral, geneticaavescaipira,geneticaavesindustrial, idadeaoabate, incubadora,ingredientesdaracaoproduzida,localvendaabatedouro,localvendafeiralivre,localvendafrigorifico,localvendanapropriedade
+        ,localvendaoutros
+        ,localvendasupermercado
+        ,objetivoconsumo
+        ,objetivoincubadoracriacao
+        ,objetivoincubadoravenda
+        ,objetivovenda,
+        pesomedio,
+        principaisentraves,
+        prodsemanalovos,
+        producaomensaldepintos,
+        produtoscomercfrangaspostura,
+        produtoscomercfrangoabatido,
+        produtoscomercfrangovivo,
+        produtoscomercovos,
+        produtoscomercovosferteis,
+        produtoscomercpinto1dia,
+        produtoscomercreprodutores,
+        qtdanimaisalojados,
+        qtdavesparavenda,
+        qtdgalpoesavicultura,
+        quaisvacinas,
+        quantpessoas,
+        racaocomercialcrescimento,
+        racaocomercialinicial,
+        racaocomercialmarca,
+        racaocomercialterminacao,
+        racaoproduzidacrescimento,
+        racaoproduzidainicial,
+        racaoproduzidaterminacao,
+        sistemacriacaoextensivo,
+        sistemacriacaointensivo,
+        sistemacriacaosemiintensivo,
+        vacinas});
+    });
+
+    const csvFields = ["capacidadetotalalojamento" , "finalidadeavicultura" , "finalidadecorte" , "finalidadepostura" , " freqvendaabate" , "freqvendamensal" , "freqvendaoutros " , "freqvendasemanal " , "freqvendatrimestral" , " geneticaavescaipira" , "geneticaavesindustrial" , " idadeaoabate" , " incubadora" , "ingredientesdaracaoproduzida" , "localvendaabatedouro" , "localvendafeiralivre" , "localvendafrigorifico" , "localvendanapropriedade"
+    , "localvendaoutros" , "localvendasupermercado" , "objetivoconsumo" , "objetivoincubadoracriacao" , "objetivoincubadoravenda" , "objetivovenda"
+     , 
+     "pesomedio" 
+     , "principaisentraves" , "prodsemanalovos" , "producaomensaldepintos" , "produtoscomercfrangaspostura" , 
+     "produtoscomercfrangoabatido"
+      , " produtoscomercfrangovivo"
+       ,
+       "produtoscomercovos" , " produtoscomercovosferteis" , "produtoscomercpinto1dia" , "produtoscomercreprodutores" ,
+        "qtdanimaisalojados" , "qtdavesparavenda" , "qtdgalpoesavicultura" , "quaisvacinas" , "quantpessoas" , "racaocomercialcrescimento" ,
+         "racaocomercialinicial" , "racaocomercialmarca" , 
+         "racaocomercialterminacao" , 
+    "racaoproduzidacrescimento" , 
+    "racaoproduzidainicial" , 
+    "racaoproduzidaterminacao" ,
+    "sistemacriacaoextensivo" , 
+    "sistemacriacaointensivo" , 
+    "sistemacriacaosemiintensivo" , 
+    "vacinas"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(aves);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=aves.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadbovinocultura = (req, res) => {
+  AgriFamiliar.findAll().then((objs) => {
+    let defesas = [];
+
+    objs.forEach((obj) => {
+      const {   aptidaocorte,
+        aptidaoleite,
+        bebedourofonte,
+        bebedouromanilha,
+        bebedourotambor,
+        cochoscomcobertura,
+        cochossemcobertura,
+        controleendoectoquais
+        controleendoectoparasitas,
+        controlemamiteposdipping,
+        controlemamitepredipping,
+        controlemamiteseqordenha,
+        controlemamitetestecaneca,
+        controlemamitetestecmt,
+        curralestruturaaguaencanada,
+        curralestruturabalanca,
+        curralestruturabrete,
+        curralestruturacobertura,
+        curralestruturapisoconcreto,
+        curralestruturaquantdivisoes,
+        curralestruturaseringa,
+        curralestruturatamanho
+        curralestruturatronco,
+        destinacaoleiteconsumo,
+        destinacaoleiteoutros,
+        destinacaoleiteprodartesanal,
+        destinacaoleitevenda,
+        examesdorebanho,
+        finalidadebovinocultura,
+        finalidadecria,
+        finalidadeleite,
+        finalidaderecria,
+        finalidadeterminacao,
+        fonteaguanascente,
+        fonteaguapocoartesiano,
+        fonteaguapococomum,
+        fonteaguarepresa,
+        fonteaguario,
+        manejopastagemadubacao,
+        manejopastagemanalisedesolo,
+        manejopastagemcalagem,
+        manejopastagemirrigacao,
+        ordenhamanual,
+        ordenhamecanica,
+        ordenhatanqueresfriamento,
+        participacaoprojetoincentivo,
+        participacaoprojetoincentivoinstituicao,
+        pastejocontinuo,
+        pastejorotacionado,
+        principaisentraves,
+        produtoscomercializadosbezerro,
+        produtoscomercializadosboi,
+        produtoscomercializadoscarneos,
+        produtoscomercializadoscarneosdest,
+        produtoscomercializadoslacteos,
+        produtoscomercializadosleite,
+        produtoscomercializadosnovilho,
+        quantpessoas,
+        quantproducaoleitedia,
+        quantidadeordenha,
+        quantidadepiquetes,
+        reprodestacaomonta,
+        reprodiatf,
+        reprodinseminacaoartificial,
+        reprodmontanatural,
+        reprodtransferenciaembriao,
+        sistemacriacaoapasto,
+        sistemacriacaoconfinado,
+        sistemacriacaosemiconfinado,
+        suplemalimentarconcentrado,
+        suplemalimentarsalmineral,
+        suplemalimentarvolumoso,
+        vacinaaftosa,
+        vacinabrucelose,
+        vacinaclostridiose,
+        vacinaraiva } = obj;
+      defesas.push({   aptidaocorte,
+        aptidaoleite,
+        bebedourofonte,
+        bebedouromanilha,
+        bebedourotambor,
+        cochoscomcobertura,
+        cochossemcobertura,
+        controleendoectoquais
+        controleendoectoparasitas,
+        controlemamiteposdipping,
+        controlemamitepredipping,
+        controlemamiteseqordenha,
+        controlemamitetestecaneca,
+        controlemamitetestecmt,
+        curralestruturaaguaencanada,
+        curralestruturabalanca,
+        curralestruturabrete,
+        curralestruturacobertura,
+        curralestruturapisoconcreto,
+        curralestruturaquantdivisoes,
+        curralestruturaseringa,
+        curralestruturatamanho
+        curralestruturatronco,
+        destinacaoleiteconsumo,
+        destinacaoleiteoutros,
+        destinacaoleiteprodartesanal,
+        destinacaoleitevenda,
+        examesdorebanho,
+        finalidadebovinocultura,
+        finalidadecria,
+        finalidadeleite,
+        finalidaderecria,
+        finalidadeterminacao,
+        fonteaguanascente,
+        fonteaguapocoartesiano,
+        fonteaguapococomum,
+        fonteaguarepresa,
+        fonteaguario,
+        manejopastagemadubacao,
+        manejopastagemanalisedesolo,
+        manejopastagemcalagem,
+        manejopastagemirrigacao,
+        ordenhamanual,
+        ordenhamecanica,
+        ordenhatanqueresfriamento,
+        participacaoprojetoincentivo,
+        participacaoprojetoincentivoinstituicao,
+        pastejocontinuo,
+        pastejorotacionado,
+        principaisentraves,
+        produtoscomercializadosbezerro,
+        produtoscomercializadosboi,
+        produtoscomercializadoscarneos,
+        produtoscomercializadoscarneosdest,
+        produtoscomercializadoslacteos,
+        produtoscomercializadosleite,
+        produtoscomercializadosnovilho,
+        quantpessoas,
+        quantproducaoleitedia,
+        quantidadeordenha,
+        quantidadepiquetes,
+        reprodestacaomonta,
+        reprodiatf,
+        reprodinseminacaoartificial,
+        reprodmontanatural,
+        reprodtransferenciaembriao,
+        sistemacriacaoapasto,
+        sistemacriacaoconfinado,
+        sistemacriacaosemiconfinado,
+        suplemalimentarconcentrado,
+        suplemalimentarsalmineral,
+        suplemalimentarvolumoso,
+        vacinaaftosa,
+        vacinabrucelose,
+        vacinaclostridiose,
+        vacinaraiva});
+    });
+
+    const csvFields = [  "aptidaocorte" , "aptidaoleite" , "bebedourofonte" , "bebedouromanilha" , "bebedourotambor" , "cochoscomcobertura" , "cochossemcobertura" , "controleendoectoquais",
+    "controleendoectoparasitas" , "controlemamiteposdipping" , "controlemamitepredipping" , "controlemamiteseqordenha" , "controlemamitetestecaneca" , "controlemamitetestecmt" , "curralestruturaaguaencanada" , "curralestruturabalanca" , "curralestruturabrete" , "curralestruturacobertura" , "curralestruturapisoconcreto" , "curralestruturaquantdivisoes" , "curralestruturaseringa" , "curralestruturatamanho",
+    "curralestruturatronco" , "destinacaoleiteconsumo" , "destinacaoleiteoutros" , "destinacaoleiteprodartesanal" , "destinacaoleitevenda" , "examesdorebanho" , "finalidadebovinocultura" , "finalidadecria" , "finalidadeleite" , "finalidaderecria" , "finalidadeterminacao" , "fonteaguanascente" , "fonteaguapocoartesiano" , "fonteaguapococomum" , "fonteaguarepresa" , "fonteaguario" , "manejopastagemadubacao" , "manejopastagemanalisedesolo" , "manejopastagemcalagem" , "manejopastagemirrigacao" , "ordenhamanual" , "ordenhamecanica" , "ordenhatanqueresfriamento" , "participacaoprojetoincentivo" , "participacaoprojetoincentivoinstituicao" , "pastejocontinuo" , "pastejorotacionado" , "principaisentraves" , "produtoscomercializadosbezerro" , "produtoscomercializadosboi" , "produtoscomercializadoscarneos" , "produtoscomercializadoscarneosdest" , "produtoscomercializadoslacteos" , "produtoscomercializadosleite" , "produtoscomercializadosnovilho" , "quantpessoas" , "quantproducaoleitedia" , "quantidadeordenha" , "quantidadepiquetes" , "reprodestacaomonta" , "reprodiatf" , "reprodinseminacaoartificial" , "reprodmontanatural" , "reprodtransferenciaembriao" , "sistemacriacaoapasto" , "sistemacriacaoconfinado" , "sistemacriacaosemiconfinado" , "suplemalimentarconcentrado" , "suplemalimentarsalmineral" , "suplemalimentarvolumoso" , "vacinaaftosa" , "vacinabrucelose" , "vacinaclostridiose" , "vacinaraiva"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(bovinocultura);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=bovinocultura.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {

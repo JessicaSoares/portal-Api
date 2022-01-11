@@ -20,6 +20,10 @@ module.exports = app => {
 
   router.get("/downloadagrifamiliar", tutorials.downloadagrifamiliar);
 
+  router.get("/downloadaves", tutorials.downloadaves);
+
+  router.get("/downloadbovinocultura", tutorials.downloadbovinocultura);
+
   // Retrieve a single Tutorial with id
   router.get("/:id", tutorials.findOne);
 
