@@ -13,6 +13,12 @@ module.exports = app => {
   router.get("/published", tutorials.findAllPublished);
 
   router.get("/download", tutorials.download);
+  
+  router.get("/downloaddefesas", tutorials.downloaddefesas);
+
+  router.get("/downloadfolhapagamento", tutorials.downloadfolhapagamento);
+
+  router.get("/downloadagrifamiliar", tutorials.downloadagrifamiliar);
 
   // Retrieve a single Tutorial with id
   router.get("/:id", tutorials.findOne);
@@ -26,6 +32,6 @@ module.exports = app => {
   // Delete all Tutorials
   router.delete("/", tutorials.deleteAll);
 
-  
+ 
   app.use('/api/tutorials', router);
 };

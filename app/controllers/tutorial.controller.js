@@ -1,5 +1,8 @@
 const db = require("../models");
 const Tutorial = db.tutorials;
+const Queimadas = db.defesas;
+const FolhaPagamento = db.folhapagamento;
+const AgriFamiliar = db.agrifamiliar;
 const Op = db.Sequelize.Op;
 
 const CsvParser = require("json2csv").Parser;
@@ -19,6 +22,67 @@ exports.download = (req, res) => {
 
     res.setHeader("Content-Type", "text/csv");
     res.setHeader("Content-Disposition", "attachment; filename=tutorials.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloaddefesas = (req, res) => {
+  Queimadas.findAll().then((objs) => {
+    let defesas = [];
+
+    objs.forEach((obj) => {
+      const { data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais , area_afetada, status, lat, log } = obj;
+      defesas.push({ data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais , area_afetada, status, lat, log });
+    });
+
+    const csvFields = ["data", "hora", "duracao", "endereco","bairro", "muncipio", "natureza" , "danos_estruturais", "area_afetada" , "status", "lat", "log"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(defesas);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=defesas.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadfolhapagamento = (req, res) => {
+  FolhaPagamento.findAll().then((objs) => {
+    let defesas = [];
+
+    objs.forEach((obj) => {
+      const { data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais , area_afetada, status, lat, log } = obj;
+      defesas.push({ data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais , area_afetada, status, lat, log });
+    });
+
+    const csvFields = ["data", "hora", "duracao", "endereco","bairro", "muncipio", "natureza" , "danos_estruturais", "area_afetada" , "status", "lat", "log"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(defesas);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=folhadepagamento.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+
+exports.downloadagrifamiliar = (req, res) => {
+  AgriFamiliar.findAll().then((objs) => {
+    let defesas = [];
+
+    objs.forEach((obj) => {
+      const { bairro, datanascimento, escolaridade, estadocivil, feirante, tipoprodutor } = obj;
+      defesas.push({ bairro, datanascimento, escolaridade, estadocivil, feirante, tipoprodutor });
+    });
+
+    const csvFields = ["bairro", "datanascimento", "escolaridade", "estadocivil","feirante", "tipoprodutor"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(defesas);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
 
     res.status(200).end(csvData);
   });
