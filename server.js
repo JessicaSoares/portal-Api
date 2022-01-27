@@ -7,7 +7,7 @@ const app = express();
 
 
 var corsOptions = {
-  origin: "https://observatorio.parauapebas.pa.gov.br"
+  origin: "http://localhost:3000"
 };
 
 app.use(cors(corsOptions));

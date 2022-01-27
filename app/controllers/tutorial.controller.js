@@ -5,6 +5,10 @@ const FolhaPagamento = db.folhapagamento;
 const Aves = db.aves;
 const AgriFamiliar = db.agrifamiliar;
 const Op = db.Sequelize.Op;
+const Credor = db.credor;
+const Empregospormunicipio = db.empregospormunicipio;
+const Empregosporsetor = db.empregosporsetor;
+const Empregosporsexo = db.empregosporsexo;
 
 const CsvParser = require("json2csv").Parser;
 
@@ -88,6 +92,109 @@ exports.downloadagrifamiliar = (req, res) => {
     res.status(200).end(csvData);
   });
 };
+
+exports.downloadocarmentarios = (req, res) => {
+  Credor.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { nome } = obj;
+      credor.push({ nome});
+    });
+
+    const csvFields = ["nome"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadempregospormunicipio = (req, res) => {
+  Empregospormunicipio.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
+      credor.push({  ano, mes, admitidos, desligados, saldo, estoque });
+    });
+
+    const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=empregos_por_municipio.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+  exports.downloadempregosporsetor = (req, res) => {
+    Empregosporsetor.findAll().then((objs) => {
+      let credor = [];
+  
+      objs.forEach((obj) => {
+        const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
+        credor.push({  ano, mes, admitidos, desligados, saldo, estoque });
+      });
+  
+      const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
+      const csvParser = new CsvParser({ csvFields });
+      const csvData = csvParser.parse(credor);
+  
+      res.setHeader("Content-Type", "text/csv");
+      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+  
+      res.status(200).end(csvData);
+    });
+  };
+
+  
+  exports.downloadempregosporsexo = (req, res) => {
+    Empregosporsexo.findAll().then((objs) => {
+      let credor = [];
+  
+        objs.forEach((obj) => {
+          const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
+          credor.push({  ano, mes, admitidos, desligados, saldo, estoque });
+        });
+    
+        const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
+        const csvParser = new CsvParser({ csvFields });
+        const csvData = csvParser.parse(credor);
+  
+      res.setHeader("Content-Type", "text/csv");
+      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+  
+      res.status(200).end(csvData);
+    });
+  };
+
+  
+
+  exports.downloadempregos = (req, res) => {
+    Credor.findAll().then((objs) => {
+      let credor = [];
+  
+      objs.forEach((obj) => {
+        const { nome } = obj;
+        credor.push({ nome});
+      });
+  
+      const csvFields = ["nome"];
+      const csvParser = new CsvParser({ csvFields });
+      const csvData = csvParser.parse(credor);
+  
+      res.setHeader("Content-Type", "text/csv");
+      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+  
+      res.status(200).end(csvData);
+    });
+  };
+  
 
 
 
