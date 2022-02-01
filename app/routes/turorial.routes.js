@@ -24,7 +24,7 @@ module.exports = app => {
 
   router.get("/downloadempregospormunicipio", tutorials.downloadempregospormunicipio);
   router.get("/downloadempregosporsetor", tutorials.downloadempregosporsetor);
-  router.get("/downloadempregosporsexo", tutorials.downloadempregosporsexo);
+  router.get("/downloadempregosporsexo2", tutorials.downloadempregosporsexo);
   // Retrieve a single Tutorial with id
   router.get("/:id", tutorials.findOne);
 
