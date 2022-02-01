@@ -7,7 +7,7 @@ const app = express();
 
 
 var corsOptions = {
-  origin: "https://observatorioapp.parauapebas.pa.gov.br/"
+  origin: "https://observatorio.parauapebas.pa.gov.br/"
 };
 
 app.use(cors(corsOptions));
