@@ -13,7 +13,7 @@ module.exports = app => {
   router.get("/published", tutorials.findAllPublished);
 
   router.get("/download", tutorials.download);
-  
+
   router.get("/downloaddefesas", tutorials.downloaddefesas);
 
   router.get("/downloadfolhapagamento", tutorials.downloadfolhapagamento);
@@ -32,7 +32,10 @@ module.exports = app => {
   router.get("/downloadimportacao", tutorials.downloadimportacao);
   router.get("/downloadexportacao", tutorials.downloadexportacao);
   router.get("/downloadsaldo", tutorials.downloadsaldo);
-  
+
+  router.get("/downloadescolasealunos", tutorials.downloadescolasealunos);
+  router.get("/downloadnotaideb", tutorials.downloadnotaideb);
+
 
   router.get("/downloadaves", tutorials.downloadaves);
 
@@ -51,7 +54,6 @@ module.exports = app => {
   // Delete all Tutorials
   router.delete("/", tutorials.deleteAll);
 
- 
+
   app.use('/api/tutorials', router);
 };
-

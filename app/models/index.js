@@ -39,4 +39,7 @@ db.importacao = require("./importacao.model.js")(sequelize, Sequelize);
 db.exportacao = require("./exportacao.model.js")(sequelize, Sequelize);
 db.saldo = require("./saldo.model.js")(sequelize, Sequelize);
 
+db.escolasealunos = require("./escolas_e_alunos.model.js")(sequelize, Sequelize);
+db.notaideb = require("./nota_ideb_municipio.model.js")(sequelize, Sequelize);
+
 module.exports = db;

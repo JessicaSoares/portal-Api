@@ -15,10 +15,11 @@ const Rebanhomunicipal = db.rebanhomunicipal;
 const Aves = db.aves;
 const Bovinos = db.bovinos;
 const ProdutosCap = db.produtoscap;
-
 const Exportacao = db.exportacao;
 const Importacao = db.importacao;
 const Saldo = db.saldo;
+const Escolasalunos = db.escolasealunos;
+const NotaIdeb = db.notaideb;
 
 const CsvParser = require("json2csv").Parser;
 
@@ -28,10 +29,10 @@ exports.download = (req, res) => {
 
     objs.forEach((obj) => {
       const { ano, mes, grupo, setor, admitidos, desligados, saldo, estoque } = obj;
-      tutorials.push({ ano, mes, grupo, setor, admitidos ,desligados, saldo, estoque });
+      tutorials.push({ ano, mes, grupo, setor, admitidos, desligados, saldo, estoque });
     });
 
-    const csvFields = ["Ano", "mes", "grupo", "setor","admitidos", "desligados", "saldo"];
+    const csvFields = ["Ano", "mes", "grupo", "setor", "admitidos", "desligados", "saldo"];
     const csvParser = new CsvParser({ csvFields });
     const csvData = csvParser.parse(tutorials);
 
@@ -47,11 +48,11 @@ exports.downloaddefesas = (req, res) => {
     let defesas = [];
 
     objs.forEach((obj) => {
-      const { data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais , area_afetada, status, lat, log } = obj;
-      defesas.push({ data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais , area_afetada, status, lat, log });
+      const { data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais, area_afetada, status, lat, log } = obj;
+      defesas.push({ data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais, area_afetada, status, lat, log });
     });
 
-    const csvFields = ["data", "hora", "duracao", "endereco","bairro", "muncipio", "natureza" , "danos_estruturais", "area_afetada" , "status", "lat", "log"];
+    const csvFields = ["data", "hora", "duracao", "endereco", "bairro", "muncipio", "natureza", "danos_estruturais", "area_afetada", "status", "lat", "log"];
     const csvParser = new CsvParser({ csvFields });
     const csvData = csvParser.parse(defesas);
 
@@ -67,11 +68,11 @@ exports.downloadfolhapagamento = (req, res) => {
     let defesas = [];
 
     objs.forEach((obj) => {
-      const { data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais , area_afetada, status, lat, log } = obj;
-      defesas.push({ data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais , area_afetada, status, lat, log });
+      const { data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais, area_afetada, status, lat, log } = obj;
+      defesas.push({ data, hora, duracao, endereco, bairro, muncipio, zona, natureza, danos_estruturais, area_afetada, status, lat, log });
     });
 
-    const csvFields = ["data", "hora", "duracao", "endereco","bairro", "muncipio", "natureza" , "danos_estruturais", "area_afetada" , "status", "lat", "log"];
+    const csvFields = ["data", "hora", "duracao", "endereco", "bairro", "muncipio", "natureza", "danos_estruturais", "area_afetada", "status", "lat", "log"];
     const csvParser = new CsvParser({ csvFields });
     const csvData = csvParser.parse(defesas);
 
@@ -82,14 +83,13 @@ exports.downloadfolhapagamento = (req, res) => {
   });
 };
 
-
 exports.downloadagrifamiliar = (req, res) => {
   AgriFamiliar.findAll().then((objs) => {
     let defesas = [];
 
     objs.forEach((obj) => {
-      const {datanascimento, sexo, escolaridade, feirante} = obj;
-      defesas.push({datanascimento, sexo, escolaridade, feirante});
+      const { datanascimento, sexo, escolaridade, feirante } = obj;
+      defesas.push({ datanascimento, sexo, escolaridade, feirante });
     });
 
     const csvFields = ["Data de Nascimento", "Sexo", "Escolaridade", "Feirante"];
@@ -109,7 +109,7 @@ exports.downloadocarmentarios = (req, res) => {
 
     objs.forEach((obj) => {
       const { nome } = obj;
-      credor.push({ nome});
+      credor.push({ nome });
     });
 
     const csvFields = ["nome"];
@@ -129,7 +129,7 @@ exports.downloadempregospormunicipio = (req, res) => {
 
     objs.forEach((obj) => {
       const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
-      credor.push({  ano, mes, admitidos, desligados, saldo, estoque });
+      credor.push({ ano, mes, admitidos, desligados, saldo, estoque });
     });
 
     const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
@@ -142,289 +142,307 @@ exports.downloadempregospormunicipio = (req, res) => {
     res.status(200).end(csvData);
   });
 };
-  exports.downloadempregosporsetor = (req, res) => {
-    Empregosporsetor.findAll().then((objs) => {
-      let credor = [];
-  
-      objs.forEach((obj) => {
-        const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
-        credor.push({  ano, mes, admitidos, desligados, saldo, estoque });
-      });
-  
-      const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
-      const csvParser = new CsvParser({ csvFields });
-      const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+exports.downloadempregosporsetor = (req, res) => {
+  Empregosporsetor.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
+      credor.push({ ano, mes, admitidos, desligados, saldo, estoque });
     });
-  };
 
-  
-  exports.downloadempregosporsexo = (req, res) => {
-    Empregosporsexo.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
-          credor.push({  ano, mes, admitidos, desligados, saldo, estoque });
-        });
-    
-        const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadempregosporsexo = (req, res) => {
+  Empregosporsexo.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
+      credor.push({ ano, mes, admitidos, desligados, saldo, estoque });
     });
-  };
 
-    
-  exports.downloadaves = (req, res) => {
-    Aves.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { finalidadeavicultura, finalidadecorte, finalidadepostura} = obj;
-          credor.push({ finalidadeavicultura, finalidadecorte, finalidadepostura});
-        });
-    
-        const csvFields = ["Finalidade da Avicultura", "Finalidade do Corte", "Finalidade da Postura"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadaves = (req, res) => {
+  Aves.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { finalidadeavicultura, finalidadecorte, finalidadepostura } = obj;
+      credor.push({ finalidadeavicultura, finalidadecorte, finalidadepostura });
     });
-  };
 
+    const csvFields = ["Finalidade da Avicultura", "Finalidade do Corte", "Finalidade da Postura"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
 
-  exports.downloadbovinos = (req, res) => {
-    Bovinos.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { aptidaoleite, aptidaocorte, femeas0a12meses, femeas13a24meses, femeas25a36meses, femeasacimade36meses,machos0a12meses, machos13a24meses, machos25a36meses, machosacimade36meses  } = obj;
-          credor.push({ aptidaoleite, aptidaocorte, femeas0a12meses, femeas13a24meses, femeas25a36meses, femeasacimade36meses,machos0a12meses, machos13a24meses, machos25a36meses, machosacimade36meses  });
-        });
-    
-        const csvFields = ["Aptidão leite", "Aptidão corte", "Fêmeas de 0 a 12 meses", "Fêmeas de 13 a 24 meses", "Fêmeas de 25 a 36 meses", "Machos de 0 a 12 meses","Machos de 13 a 24 meses", "Machos de 25 a 36 meses", "Machos acima de 36 meses"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadbovinos = (req, res) => {
+  Bovinos.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { aptidaoleite, aptidaocorte, femeas0a12meses, femeas13a24meses, femeas25a36meses, femeasacimade36meses, machos0a12meses, machos13a24meses, machos25a36meses, machosacimade36meses } = obj;
+      credor.push({ aptidaoleite, aptidaocorte, femeas0a12meses, femeas13a24meses, femeas25a36meses, femeasacimade36meses, machos0a12meses, machos13a24meses, machos25a36meses, machosacimade36meses });
     });
-  };
 
-  exports.downloadprodutoscap = (req, res) => {
-    ProdutosCap.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
-          credor.push({  ano, mes, admitidos, desligados, saldo, estoque });
-        });
-    
-        const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    const csvFields = ["Aptidão leite", "Aptidão corte", "Fêmeas de 0 a 12 meses", "Fêmeas de 13 a 24 meses", "Fêmeas de 25 a 36 meses", "Machos de 0 a 12 meses", "Machos de 13 a 24 meses", "Machos de 25 a 36 meses", "Machos acima de 36 meses"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadprodutoscap = (req, res) => {
+  ProdutosCap.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, mes, admitidos, desligados, saldo, estoque } = obj;
+      credor.push({ ano, mes, admitidos, desligados, saldo, estoque });
     });
-  };
+
+    const csvFields = ["Ano", "Mês", "Admitidos", "Desligados", "Saldo", "Estoque"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
 
 
+exports.downloadempregos = (req, res) => {
+  Credor.findAll().then((objs) => {
+    let credor = [];
 
-  
-
-  exports.downloadempregos = (req, res) => {
-    Credor.findAll().then((objs) => {
-      let credor = [];
-  
-      objs.forEach((obj) => {
-        const { nome } = obj;
-        credor.push({ nome});
-      });
-  
-      const csvFields = ["nome"];
-      const csvParser = new CsvParser({ csvFields });
-      const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    objs.forEach((obj) => {
+      const { nome } = obj;
+      credor.push({ nome });
     });
-  };
 
-  exports.downloadpib = (req, res) => {
-    Pib.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { municipio, valor, ano, variavel} = obj;
-          credor.push( { municipio, valor, ano, variavel});
-        });
-    
-        const csvFields = ["Municipio", "Valor", "Ano", "Variável"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    const csvFields = ["nome"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadpib = (req, res) => {
+  Pib.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { municipio, valor, ano, variavel } = obj;
+      credor.push({ municipio, valor, ano, variavel });
     });
-  };
 
-  exports.downloadproducaoanimal= (req, res) => {
-    Producaoanimal.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { ano, valor, municipio, produto} = obj;
-          credor.push(  { ano, valor, municipio, produto});
-        });
-    
-        const csvFields = ["Ano", "Valor", "Município", "Produto"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    const csvFields = ["Municipio", "Valor", "Ano", "Variável"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadproducaoanimal = (req, res) => {
+  Producaoanimal.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, valor, municipio, produto } = obj;
+      credor.push({ ano, valor, municipio, produto });
     });
-  };
 
-  exports.downloadrebanhomunicipal = (req, res) => {
-    Rebanhomunicipal.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { valor, ano, variavel, tipo_rebanho,municipio} = obj;
-          credor.push( { valor, ano, variavel, tipo_rebanho,municipio});
-        });
-    
-        const csvFields = ["Valor", "Ano", "Variável", "Tipo de rebanho", "Municipio"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    const csvFields = ["Ano", "Valor", "Município", "Produto"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadrebanhomunicipal = (req, res) => {
+  Rebanhomunicipal.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { valor, ano, variavel, tipo_rebanho, municipio } = obj;
+      credor.push({ valor, ano, variavel, tipo_rebanho, municipio });
     });
-  };
 
-  exports.downloadproducaoagricola = (req, res) => {
-    Producaoagricola.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { ano, municipio, variavel, produto,quantidade} = obj;
-          credor.push( { ano, municipio, variavel, produto,quantidade});
-        });
-    
-        const csvFields = ["Ano", "Municipio", "Variavel", "Produto", "Qauantidade"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    const csvFields = ["Valor", "Ano", "Variável", "Tipo de rebanho", "Municipio"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadproducaoagricola = (req, res) => {
+  Producaoagricola.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, municipio, variavel, produto, quantidade } = obj;
+      credor.push({ ano, municipio, variavel, produto, quantidade });
     });
-  };
 
+    const csvFields = ["Ano", "Municipio", "Variavel", "Produto", "Quantidade"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
 
-  exports.downloadimportacao = (req, res) => {
-    Importacao.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { ano, municipio, variavel, produto,quantidade} = obj;
-          credor.push( { ano, municipio, variavel, produto,quantidade});
-        });
-    
-        const csvFields = ["Ano", "Municipio", "Variavel", "Produto", "Qauantidade"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadimportacao = (req, res) => {
+  Importacao.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, municipio, descricao_sh2, valor_fob } = obj;
+      credor.push({ ano, municipio, descricao_sh2, valor_fob });
     });
-  };
 
-  
+    const csvFields = ["Ano", "Municipio", "Descrição", "Valor"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
 
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
 
+    res.status(200).end(csvData);
+  });
+};
 
-  exports.downloadexportacao = (req, res) => {
-    Exportacao.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { ano, municipio, variavel, produto,quantidade} = obj;
-          credor.push( { ano, municipio, variavel, produto,quantidade});
-        });
-    
-        const csvFields = ["Ano", "Municipio", "Variavel", "Produto", "Qauantidade"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+exports.downloadexportacao = (req, res) => {
+  Exportacao.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, municipio, descricao_sh2, valor_fob } = obj;
+      credor.push({ ano, municipio, descricao_sh2, valor_fob });
     });
-  };
 
-  
+    const csvFields = ["Ano", "Municipio", "Descrição", "Valor"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
 
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
 
+    res.status(200).end(csvData);
+  });
+};
 
-  exports.downloadsaldo = (req, res) => {
-    Saldo.findAll().then((objs) => {
-      let credor = [];
-  
-        objs.forEach((obj) => {
-          const { ano, municipio, variavel, produto,quantidade} = obj;
-          credor.push( { ano, municipio, variavel, produto,quantidade});
-        });
-    
-        const csvFields = ["Ano", "Municipio", "Variavel", "Produto", "Qauantidade"];
-        const csvParser = new CsvParser({ csvFields });
-        const csvData = csvParser.parse(credor);
-  
-      res.setHeader("Content-Type", "text/csv");
-      res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
-  
-      res.status(200).end(csvData);
+exports.downloadsaldo = (req, res) => {
+  Saldo.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, municipio, saldo, total_exportacao, total_importacao } = obj;
+      credor.push({ ano, municipio, saldo, total_exportacao, total_importacao });
     });
-  };
 
-  
+    const csvFields = ["Ano", "Municipio", "Saldo", "Total de exportação", "Total de Importação"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
 
-  
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
 
-  
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadescolasealunos = (req, res) => {
+  Escolasalunos.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { ano, municipio, saldo, total_exportacao, total_importacao } = obj;
+      credor.push({ ano, municipio, saldo, total_exportacao, total_importacao });
+    });
+
+    const csvFields = ["Ano", "Municipio", "Saldo", "Total de exportação", "Total de Importação"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
 
 
+exports.downloadnotaideb = (req, res) => {
+  NotaIdeb.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const { municipio, ano, serie_ano, ideb } = obj;
+      credor.push({ municipio, ano, serie_ano, ideb });
+    });
+
+    const csvFields = ["Município", "Ano", "Série/Ano", "Ideb"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
