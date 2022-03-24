@@ -1,29 +1,12 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('receita', {
+  return sequelize.define('PIB', {
     id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true
     },
-    datamovimento: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
-    numerodocumento: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    codigo: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    contribuinte: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    cnpjcpf: {
+    municipio: {
       type: DataTypes.TEXT,
       allowNull: true
     },
@@ -31,22 +14,32 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DOUBLE,
       allowNull: true
     },
-    registro: {
+    ano: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    especificacao: {
+    variavel: {
       type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'receita',
-    schema: 'orcarmento',
+    tableName: 'pib',
+    schema: 'pib_ibge',
     timestamps: false,
     indexes: [
       {
-        name: "receita_pkey",
+        name: "idx_pib_lookup",
+        fields: [
+          { name: "codigo" },
+          { name: "municipio" },
+          { name: "variavel" },
+          { name: "ano" },
+          { name: "valor" },
+        ]
+      },
+      {
+        name: "pib_pkey",
         unique: true,
         fields: [
           { name: "id" },

@@ -2,46 +2,39 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('ibge_pam', {
     codigo: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: true
     },
     municipio: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     variavel: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     ano: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     produto: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     valor: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: true
+    },
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     }
   }, {
     sequelize,
     tableName: 'ibge_pam',
     schema: 'producao_agricola_municipal',
-    timestamps: false,
-    indexes: [
-      {
-        name: "idx_ibge_pam_lookup",
-        fields: [
-          { name: "codigo" },
-          { name: "municipio" },
-          { name: "variavel" },
-          { name: "ano" },
-          { name: "produto" },
-          { name: "valor" },
-        ]
-      },
-    ]
+    timestamps: false
   });
 };

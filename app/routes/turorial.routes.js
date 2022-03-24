@@ -17,6 +17,8 @@ module.exports = app => {
   router.get("/downloaddefesas", tutorials.downloaddefesas);
 
   router.get("/downloadfolhapagamento", tutorials.downloadfolhapagamento);
+  router.get("/downloadpib", tutorials.downloadpib);
+
 
   router.get("/downloadagrifamiliar", tutorials.downloadagrifamiliar);
 
@@ -25,6 +27,18 @@ module.exports = app => {
   router.get("/downloadempregospormunicipio", tutorials.downloadempregospormunicipio);
   router.get("/downloadempregosporsetor", tutorials.downloadempregosporsetor);
   router.get("/downloadempregosporsexo", tutorials.downloadempregosporsexo);
+  router.get("/downloadproducaoagricola", tutorials.downloadproducaoagricola);
+
+  router.get("/downloadimportacao", tutorials.downloadimportacao);
+  router.get("/downloadexportacao", tutorials.downloadexportacao);
+  router.get("/downloadsaldo", tutorials.downloadsaldo);
+  
+
+  router.get("/downloadaves", tutorials.downloadaves);
+
+  router.get("/downloadbovinos", tutorials.downloadbovinos);
+  router.get("/downloadprodutoscap", tutorials.downloadprodutoscap);
+  router.get("/downloadrebanhomunicipal", tutorials.downloadrebanhomunicipal);
   // Retrieve a single Tutorial with id
   router.get("/:id", tutorials.findOne);
 
@@ -40,3 +54,4 @@ module.exports = app => {
  
   app.use('/api/tutorials', router);
 };
+

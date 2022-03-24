@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('movimentacao_de_emprego_caged', {
+  return sequelize.define('empregos_por_sexo', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -8,48 +8,51 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     ano: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: true
     },
     mes: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    grupo: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    setor: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     admitidos: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     desligados: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     saldo: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     estoque: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'movimentacao_de_emprego_caged',
+    tableName: 'empregos_por_sexo',
     schema: 'empregos',
     timestamps: false,
     indexes: [
       {
-        name: "movimentacao_de_emprego_caged_pkey1",
+        name: "empregos_por_sexo_pkey",
         unique: true,
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "idx_empregos_por_sexo_lookup",
+        fields: [
+          { name: "ano" },
+          { name: "mes" },
+          { name: "admitidos" },
+          { name: "desligados" },
+          { name: "saldo" },
+          { name: "estoque" },
         ]
       },
     ]

@@ -2,19 +2,19 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('ppm_efetivo_de_rebanho', {
     codigo: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: true
     },
     municipio: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     variavel: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     tipo_rebanho: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     ano: {
@@ -22,13 +22,28 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     valor: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: true
+    },
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     }
   }, {
     sequelize,
     tableName: 'ppm_efetivo_de_rebanho',
     schema: 'producao_pecuaria_municipal',
-    timestamps: false
+    timestamps: false,
+    indexes: [
+      {
+        name: "ppm_efetivo_de_rebanho_pkey",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+    ]
   });
 };

@@ -1,25 +1,23 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('receita', {
-    id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
+  return sequelize.define('pagamento_despesas_teste', {
+    id_orgao: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
     },
     datamovimento: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true
     },
     numerodocumento: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    codigo: {
+    numeroempenho: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    contribuinte: {
+    credor: {
       type: DataTypes.TEXT,
       allowNull: true
     },
@@ -27,31 +25,34 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    valor: {
-      type: DataTypes.DOUBLE,
+    naturezadadespesa: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    modalidadelicitacao: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
     registro: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    especificacao: {
-      type: DataTypes.TEXT,
+    valor: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
+    },
+    idempenho: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
+    },
+    id_elemento_despesa: {
+      type: DataTypes.DOUBLE,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'receita',
+    tableName: 'pagamento_despesas_teste',
     schema: 'orcarmento',
-    timestamps: false,
-    indexes: [
-      {
-        name: "receita_pkey",
-        unique: true,
-        fields: [
-          { name: "id" },
-        ]
-      },
-    ]
+    timestamps: false
   });
 };

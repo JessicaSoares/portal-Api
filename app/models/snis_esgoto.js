@@ -1,52 +1,55 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('receita', {
+  return sequelize.define('snis_esgoto', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    datamovimento: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
-    numerodocumento: {
+    municipio: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    codigo: {
+    ano: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    contribuinte: {
+    populacao_atendida: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    cnpjcpf: {
+    volume_esgoto_coletado: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    valor: {
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    registro: {
+    volume_esgoto_tratado: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    especificacao: {
+    populacao_atendida_urbana: {
       type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'receita',
-    schema: 'orcarmento',
+    tableName: 'snis_esgoto',
+    schema: 'infraestrutura',
     timestamps: false,
     indexes: [
       {
-        name: "receita_pkey",
+        name: "idx_snis_esgoto_lookup",
+        fields: [
+          { name: "municipio" },
+          { name: "ano" },
+          { name: "populacao_atendida" },
+          { name: "volume_esgoto_coletado" },
+          { name: "volume_esgoto_tratado" },
+          { name: "populacao_atendida_urbana" },
+        ]
+      },
+      {
+        name: "snis_esgoto_pkey",
         unique: true,
         fields: [
           { name: "id" },

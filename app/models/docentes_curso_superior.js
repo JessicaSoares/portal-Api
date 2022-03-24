@@ -1,55 +1,53 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('receita', {
+  return sequelize.define('docentes_curso_superior', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    datamovimento: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
-    numerodocumento: {
+    municipio: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    codigo: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    contribuinte: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    cnpjcpf: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    valor: {
+    ano: {
       type: DataTypes.DOUBLE,
       allowNull: true
     },
-    registro: {
+    modalidade_ensino: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    especificacao: {
+    dependencia_administrativa: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    percentual: {
       type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'receita',
-    schema: 'orcarmento',
+    tableName: 'docentes_curso_superior',
+    schema: 'educacao',
     timestamps: false,
     indexes: [
       {
-        name: "receita_pkey",
+        name: "docentes_curso_superior_pkey",
         unique: true,
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "idx_docentes_curso_superior_lookup",
+        fields: [
+          { name: "municipio" },
+          { name: "ano" },
+          { name: "modalidade_ensino" },
+          { name: "dependencia_administrativa" },
+          { name: "percentual" },
         ]
       },
     ]

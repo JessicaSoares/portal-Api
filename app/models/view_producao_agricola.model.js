@@ -1,7 +1,12 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('pib', {
-    codigo: {
+  return sequelize.define('view_producao_agricola', {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      primaryKey: true
+    },
+    ano: {
       type: DataTypes.TEXT,
       allowNull: true
     },
@@ -13,30 +18,18 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    ano: {
+    produto: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    valor: {
+    quantidade: {
       type: DataTypes.DOUBLE,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'pib',
-    schema: 'pib_ibge',
-    timestamps: false,
-    indexes: [
-      {
-        name: "idx_pib_lookup",
-        fields: [
-          { name: "codigo" },
-          { name: "municipio" },
-          { name: "variavel" },
-          { name: "ano" },
-          { name: "valor" },
-        ]
-      },
-    ]
+    tableName: 'view_producao_agricola',
+    schema: 'producao_agricola_municipal',
+    timestamps: false
   });
 };
