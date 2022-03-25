@@ -20,6 +20,8 @@ const Importacao = db.importacao;
 const Saldo = db.saldo;
 const Escolasalunos = db.escolasealunos;
 const NotaIdeb = db.notaideb;
+const Iluminacao = db.iluminacao;
+const Agua = db.agua;
 
 const CsvParser = require("json2csv").Parser;
 
@@ -434,6 +436,46 @@ exports.downloadnotaideb = (req, res) => {
     });
 
     const csvFields = ["Município", "Ano", "Série/Ano", "Ideb"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadiluminacao = (req, res) => {
+  Iluminacao.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {bairro, tipo} = obj;
+      credor.push({bairro, tipo});
+    });
+
+    const csvFields = ["Bairro", "Tipo"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadagua = (req, res) => {
+  Iluminacao.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {municipio, ano , populacao_atendida_abastecimento, ligacoes_ativas, volume_agua_tratada_eta} = obj;
+      credor.push({municipio, ano , populacao_atendida_abastecimento, ligacoes_ativas, volume_agua_tratada_eta} );
+    });
+
+    const csvFields = ["Município", "Ano", "População abastecida", "Ligações Ativas", "Volume de água tratada"];
     const csvParser = new CsvParser({ csvFields });
     const csvData = csvParser.parse(credor);
 

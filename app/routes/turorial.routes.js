@@ -38,6 +38,8 @@ module.exports = app => {
 
 
   router.get("/downloadaves", tutorials.downloadaves);
+  router.get("/downloadiluminacao", tutorials.downloadiluminacao);
+  router.get("/downloadagua", tutorials.downloadagua);
 
   router.get("/downloadbovinos", tutorials.downloadbovinos);
   router.get("/downloadprodutoscap", tutorials.downloadprodutoscap);

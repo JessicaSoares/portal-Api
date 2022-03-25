@@ -71,7 +71,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    'Tipo de L�': {
+    'tipo': {
       type: DataTypes.TEXT,
       allowNull: true
     },
