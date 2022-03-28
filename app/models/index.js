@@ -46,4 +46,9 @@ db.iluminacao = require("./iluminacao.model.js")(sequelize, Sequelize);
 
 db.agua = require("./snis_agua.model.js")(sequelize, Sequelize);
 
+db.esgoto = require("./snis_esgoto.model.js")(sequelize, Sequelize);
+db.lixo = require("./snis_residuo_solido.model.js")(sequelize, Sequelize);
+
+db.queimadas = require("./queimadas.model.js")(sequelize, Sequelize);
+
 module.exports = db;

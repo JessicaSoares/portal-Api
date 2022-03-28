@@ -44,27 +44,6 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'snis_agua',
     schema: 'infraestrutura',
     timestamps: false,
-    indexes: [
-      {
-        name: "idx_snis_agua_lookup",
-        fields: [
-          { name: "municipio" },
-          { name: "ano" },
-          { name: "populacao_atendida_abastecimento" },
-          { name: "ligacoes_ativas" },
-          { name: "volume_agua_tratada_eta" },
-          { name: "volume_agua_consumido" },
-          { name: "economias_residencias_ativas" },
-          { name: "populacao_urbana_atendida" },
-        ]
-      },
-      {
-        name: "snis_agua_pkey",
-        unique: true,
-        fields: [
-          { name: "id" },
-        ]
-      },
-    ]
+
   });
 };

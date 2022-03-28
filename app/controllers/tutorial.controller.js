@@ -1,6 +1,5 @@
 const db = require("../models");
 const Tutorial = db.tutorials;
-const Queimadas = db.defesas;
 const FolhaPagamento = db.folhapagamento;
 const AgriFamiliar = db.agrifamiliar;
 const Op = db.Sequelize.Op;
@@ -22,6 +21,9 @@ const Escolasalunos = db.escolasealunos;
 const NotaIdeb = db.notaideb;
 const Iluminacao = db.iluminacao;
 const Agua = db.agua;
+const Esgoto = db.esgoto;
+const Lixo = db.lixo;
+const Queimadas = db.queimadas;
 
 const CsvParser = require("json2csv").Parser;
 
@@ -467,7 +469,7 @@ exports.downloadiluminacao = (req, res) => {
 };
 
 exports.downloadagua = (req, res) => {
-  Iluminacao.findAll().then((objs) => {
+  Agua.findAll().then((objs) => {
     let credor = [];
 
     objs.forEach((obj) => {
@@ -485,6 +487,70 @@ exports.downloadagua = (req, res) => {
     res.status(200).end(csvData);
   });
 };
+
+exports.downloadesgoto = (req, res) => {
+  Agua.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {municipio, ano , populacao_atendida, volume_esgoto_coletado, volume_esgoto_tratado, populacao_atendida_urbana} = obj;
+      credor.push({municipio, ano , populacao_atendida, volume_esgoto_coletado, volume_esgoto_tratado, populacao_atendida_urbana});
+    });
+
+    const csvFields = ["Município", "Ano", "População atendida", "Volume de esgoto coletado", "Volume de água tratada", "População Urbana atendida"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadlixo = (req, res) => {
+  Lixo.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {municipio, ano , populacao_atendida_coleta_domiciliar, servico} = obj;
+      credor.push({municipio, ano , populacao_atendida_coleta_domiciliar, servico});
+    });
+
+    const csvFields = ["Município", "Ano", "População atendida", "servico"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+
+
+exports.downloadqueimadas = (req, res) => {
+  Queimadas.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {data, hora , duracao, endereco, bairro, muncipio,zona } = obj;
+      credor.push({data, hora , duracao, endereco, bairro, muncipio,zona } );
+    });
+
+    const csvFields = ["Data", "Hora", "Duração", "Endereço", "Bairro", "Municipio", "Zona"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {

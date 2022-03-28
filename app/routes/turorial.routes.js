@@ -40,10 +40,14 @@ module.exports = app => {
   router.get("/downloadaves", tutorials.downloadaves);
   router.get("/downloadiluminacao", tutorials.downloadiluminacao);
   router.get("/downloadagua", tutorials.downloadagua);
+  router.get("/downloadesgoto", tutorials.downloadesgoto);
+  router.get("/downloadlixo", tutorials.downloadlixo);
 
   router.get("/downloadbovinos", tutorials.downloadbovinos);
   router.get("/downloadprodutoscap", tutorials.downloadprodutoscap);
   router.get("/downloadrebanhomunicipal", tutorials.downloadrebanhomunicipal);
+
+    router.get("/downloadqueimadas", tutorials.downloadqueimadas);
   // Retrieve a single Tutorial with id
   router.get("/:id", tutorials.findOne);
 
