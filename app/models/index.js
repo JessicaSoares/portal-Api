@@ -51,4 +51,20 @@ db.lixo = require("./snis_residuo_solido.model.js")(sequelize, Sequelize);
 
 db.queimadas = require("./queimadas.model.js")(sequelize, Sequelize);
 
+db.empresas = require("./empresas_jucepa.model.js")(sequelize, Sequelize);
+
+db.pequenoporte = require("./pequenoporte.model.js")(sequelize, Sequelize);
+
+db.medioporte = require("./medioporte.model.js")(sequelize, Sequelize);
+
+db.grandeporte = require("./grandeporte.model.js")(sequelize, Sequelize);
+db.demais = require("./demais.model.js")(sequelize, Sequelize);
+db.naoinformado = require("./naoinformado.model.js")(sequelize, Sequelize);
+db.microempresa = require("./microempresa.model.js")(sequelize, Sequelize);
+
+db.despesaspessoal = require("./despesaspessoal.model.js")(sequelize, Sequelize);
+
+db.comissionados = require("./comissionado.model.js")(sequelize, Sequelize);
+db.efetivados = require("./efetivados.model.js")(sequelize, Sequelize);
+
 module.exports = db;

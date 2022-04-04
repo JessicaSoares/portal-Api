@@ -24,6 +24,15 @@ const Agua = db.agua;
 const Esgoto = db.esgoto;
 const Lixo = db.lixo;
 const Queimadas = db.queimadas;
+const Demais = db.demais;
+const Grandeporte = db.grandeporte;
+const Medioporte = db.medioporte;
+const Microempresa = db.microempresa;
+const Naoinformado = db.naoinformado;
+const Pequenoporte = db.pequenoporte;
+const Despesaspessoal = db.despesaspessoal;
+
+
 
 const CsvParser = require("json2csv").Parser;
 
@@ -529,6 +538,27 @@ exports.downloadlixo = (req, res) => {
 };
 
 
+exports.downloadpequenoporte = (req, res) => {
+  Pequenoporte.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {razao_social, ramo , bairro, ano_de_abertura,porte_da_empresa} = obj;
+      credor.push( {razao_social, ramo ,bairro, ano_de_abertura, porte_da_empresa});
+    });
+
+    const csvFields = ["Razão Social", "Ramo", "Atividade", "Bairro", "Ano de Abertura", "Situação", "Porte", "Nome fantasia"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+
 
 exports.downloadqueimadas = (req, res) => {
   Queimadas.findAll().then((objs) => {
@@ -550,6 +580,148 @@ exports.downloadqueimadas = (req, res) => {
   });
 };
 
+
+
+
+exports.downloadmedioporte = (req, res) => {
+  Medioporte.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {razao_social, ramo , bairro, ano_de_abertura,porte_da_empresa} = obj;
+      credor.push( {razao_social, ramo ,bairro, ano_de_abertura, porte_da_empresa});
+    });
+
+    const csvFields = ["Razão Social", "Ramo", "Atividade", "Bairro", "Ano de Abertura", "Situação", "Porte", "Nome fantasia"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadmicroempresas = (req, res) => {
+  Microempresa.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {razao_social, ramo , bairro, ano_de_abertura,porte_da_empresa} = obj;
+      credor.push( {razao_social, ramo ,bairro, ano_de_abertura, porte_da_empresa});
+    });
+
+    const csvFields = ["Razão Social", "Ramo", "Atividade", "Bairro", "Ano de Abertura", "Situação", "Porte", "Nome fantasia"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloaddemais = (req, res) => {
+  Demais.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {razao_social, ramo , bairro, ano_de_abertura,porte_da_empresa} = obj;
+      credor.push( {razao_social, ramo ,bairro, ano_de_abertura, porte_da_empresa});
+    });
+
+    const csvFields = ["Razão Social", "Ramo", "Atividade", "Bairro", "Ano de Abertura", "Situação", "Porte", "Nome fantasia"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadgrandeporte = (req, res) => {
+  Grandeporte.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {razao_social, ramo , bairro, ano_de_abertura,porte_da_empresa} = obj;
+      credor.push( {razao_social, ramo ,bairro, ano_de_abertura, porte_da_empresa});
+    });
+
+    const csvFields = ["Razão Social", "Ramo", "Atividade", "Bairro", "Ano de Abertura", "Situação", "Porte", "Nome fantasia"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadnaoinformado = (req, res) => {
+  Naoinformado.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {razao_social, ramo , bairro, ano_de_abertura,porte_da_empresa} = obj;
+      credor.push( {razao_social, ramo ,bairro, ano_de_abertura, porte_da_empresa});
+    });
+
+    const csvFields = ["Razão Social", "Ramo", "Atividade", "Bairro", "Ano de Abertura", "Situação", "Porte", "Nome fantasia"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadmicroempresa = (req, res) => {
+  Microempresa.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {razao_social, ramo , bairro, ano_de_abertura,porte_da_empresa} = obj;
+      credor.push( {razao_social, ramo ,bairro, ano_de_abertura, porte_da_empresa});
+    });
+
+    const csvFields = ["Razão Social", "Ramo", "Atividade", "Bairro", "Ano de Abertura", "Situação", "Porte", "Nome fantasia"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloaddespesaspessoal = (req, res) => {
+  Despesaspessoal.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {cargo, funcao , lotacao, setor} = obj;
+      credor.push( {cargo, funcao , lotacao, setor});
+    });
+
+    const csvFields = ["Cargo", "Função", "Lotação", "Setor"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
 
 
 // Create and Save a new Tutorial
