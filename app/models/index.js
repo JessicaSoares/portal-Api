@@ -34,37 +34,28 @@ db.rebanhomunicipal = require("./rebanho_municipal.model.js")(sequelize, Sequeli
 db.aves = require("./aves.model.js")(sequelize, Sequelize);
 db.bovinos = require("./bovinos.model.js")(sequelize, Sequelize);
 db.produtoscap = require("./produtos_cap.model.js")(sequelize, Sequelize);
-
 db.importacao = require("./importacao.model.js")(sequelize, Sequelize);
 db.exportacao = require("./exportacao.model.js")(sequelize, Sequelize);
 db.saldo = require("./saldo.model.js")(sequelize, Sequelize);
-
 db.escolasealunos = require("./escolas_e_alunos.model.js")(sequelize, Sequelize);
 db.notaideb = require("./nota_ideb_municipio.model.js")(sequelize, Sequelize);
-
 db.iluminacao = require("./iluminacao.model.js")(sequelize, Sequelize);
-
+db.receita = require("./receita_model.js")(sequelize, Sequelize);
 db.agua = require("./snis_agua.model.js")(sequelize, Sequelize);
-
 db.esgoto = require("./snis_esgoto.model.js")(sequelize, Sequelize);
 db.lixo = require("./snis_residuo_solido.model.js")(sequelize, Sequelize);
-
 db.queimadas = require("./queimadas.model.js")(sequelize, Sequelize);
-
 db.empresas = require("./empresas_jucepa.model.js")(sequelize, Sequelize);
-
 db.pequenoporte = require("./pequenoporte.model.js")(sequelize, Sequelize);
-
 db.medioporte = require("./medioporte.model.js")(sequelize, Sequelize);
-
 db.grandeporte = require("./grandeporte.model.js")(sequelize, Sequelize);
 db.demais = require("./demais.model.js")(sequelize, Sequelize);
 db.naoinformado = require("./naoinformado.model.js")(sequelize, Sequelize);
 db.microempresa = require("./microempresa.model.js")(sequelize, Sequelize);
-
 db.despesaspessoal = require("./despesaspessoal.model.js")(sequelize, Sequelize);
-
 db.comissionados = require("./comissionado.model.js")(sequelize, Sequelize);
 db.efetivados = require("./efetivados.model.js")(sequelize, Sequelize);
+db.despesa = require("./despesa.model.js")(sequelize, Sequelize);
+db.acidente = require("./acidente.model.js")(sequelize, Sequelize);
 
 module.exports = db;

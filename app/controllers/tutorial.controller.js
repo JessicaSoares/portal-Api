@@ -31,6 +31,11 @@ const Microempresa = db.microempresa;
 const Naoinformado = db.naoinformado;
 const Pequenoporte = db.pequenoporte;
 const Despesaspessoal = db.despesaspessoal;
+const Efetivados = db.efetivados;
+const Comissionados = db.comissionados;
+const Receita = db.receita;
+const Despesa = db.despesa;
+const Acidente = db.acidente;
 
 
 
@@ -722,6 +727,108 @@ exports.downloaddespesaspessoal = (req, res) => {
     res.status(200).end(csvData);
   });
 };
+
+exports.downloadcomissionados = (req, res) => {
+  Comissionados.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {cargo, funcao , lotacao, setor} = obj;
+      credor.push( {cargo, funcao , lotacao, setor});
+    });
+
+    const csvFields = ["Cargo", "Função", "Lotação", "Setor"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadefetivados = (req, res) => {
+  Efetivados.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {cargo, funcao , lotacao, setor} = obj;
+      credor.push( {cargo, funcao , lotacao, setor});
+    });
+
+    const csvFields = ["Cargo", "Função", "Lotação", "Setor"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadreceita = (req, res) => {
+  Receita.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {ano, especificacao , codigo, sum} = obj;
+      credor.push( {ano, especificacao , codigo, sum});
+    });
+
+    const csvFields = ["ano", "especificacao" , "codigo", "sum"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloaddespesa = (req, res) => {
+  Despesa.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {ano, mes , orgao, elemento_despesa, despesa} = obj;
+      credor.push( {ano, mes , orgao, elemento_despesa, despesa});
+    });
+
+    const csvFields = ["ano", "mes" , "orgao", "elemento_despesa", "despesa"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+exports.downloadacidente = (req, res) => {
+  Acidente.findAll().then((objs) => {
+    let credor = [];
+
+    objs.forEach((obj) => {
+      const {nome, ano , tipo_acidente, severidade, condicao_tempo, sinalizacao_semaforica, sinalizacao_vertical, sinalizcao_horizontal,sexo,tipo_veiculo,idade} = obj;
+      credor.push( {nome, ano , tipo_acidente, severidade, condicao_tempo, sinalizacao_semaforica, sinalizacao_vertical, sinalizcao_horizontal,sexo,tipo_veiculo,idade});
+    });
+
+    const csvFields = ["nome", "ano" , "tipo_acidente", "severidade", "condicao_tempo", "sinalizacao_semaforica", "sinalizacao_vertical", "sinalizcao_horizontal","sexo","tipo_veiculo","idade"];
+    const csvParser = new CsvParser({ csvFields });
+    const csvData = csvParser.parse(credor);
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=agricultura_familiar.csv");
+
+    res.status(200).end(csvData);
+  });
+};
+
+
 
 
 // Create and Save a new Tutorial

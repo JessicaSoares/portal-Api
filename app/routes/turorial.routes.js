@@ -20,6 +20,15 @@ module.exports = app => {
 
   
   router.get("/downloadfolhapagamento", tutorials.downloadfolhapagamento);
+  
+
+  router.get("/downloadreceita", tutorials.downloadreceita);
+
+
+  router.get("/downloaddespesa", tutorials.downloaddespesa);
+  
+
+  router.get("/downloadacidente", tutorials.downloadacidente);
 
 
   router.get("/downloadpib", tutorials.downloadpib);
@@ -41,6 +50,8 @@ module.exports = app => {
 
 
   router.get("/downloadproducaoagricola", tutorials.downloadproducaoagricola);
+
+  router.get("/downloadproducaoanimal", tutorials.downloadproducaoanimal);
 
 
   router.get("/downloadimportacao", tutorials.downloadimportacao);
@@ -105,6 +116,10 @@ module.exports = app => {
   router.get("/downloadqueimadas", tutorials.downloadqueimadas);
 
   
+  router.get("/downloadefetivados", tutorials.downloadefetivados);
+
+  
+  router.get("/downloadcomissionados", tutorials.downloadcomissionados);
 
 
   // Retrieve a single Tutorial with id
